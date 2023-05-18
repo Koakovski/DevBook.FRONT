@@ -2,6 +2,7 @@ package controller
 
 import (
 	"bytes"
+	presenter "devbook-front/src/app/presenters"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -18,6 +19,7 @@ func ApiUserCreateController(w http.ResponseWriter, r *http.Request) {
 		"password": r.FormValue("password"),
 	})
 	if err != nil {
+		fmt.Println(err)
 		log.Fatal(err)
 	}
 
@@ -25,7 +27,6 @@ func ApiUserCreateController(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	response.Body.Close()
-
-	fmt.Println(response.Body)
+	defer response.Body.Close()
+	presenter.ReponsePresenter(w, response.StatusCode, nil)
 }

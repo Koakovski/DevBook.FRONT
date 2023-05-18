@@ -14,7 +14,14 @@ function createUser(event) {
         url: "api/user",
         method: "POST",
         data,
-    });
+    })
+        .done(function (data) {
+            alert(JSON.stringify(data));
+            alert("Usuário Cadastrado com sucesso!");
+        })
+        .fail(function (data) {
+            console.log(JSON.stringify(data));
+        });
 }
 
 function getFormFieldsValues() {
