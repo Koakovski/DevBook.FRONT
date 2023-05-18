@@ -6,7 +6,7 @@ import (
 )
 
 var AuthRoutes = []Route{
-	// LOGIN
+	// LOAD LOGIN PAGE
 	{
 		Uri:       "/",
 		Method:    http.MethodGet,

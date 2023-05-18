@@ -6,7 +6,7 @@ import (
 )
 
 var UserRoutes = []Route{
-	// LOGIN
+	// LOAD CREATE USER PAGE
 	{
 		Uri:       "/createUser",
 		Method:    http.MethodGet,
