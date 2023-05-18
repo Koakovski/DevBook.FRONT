@@ -1,7 +1,10 @@
 package controller
 
-import "net/http"
+import (
+	util "devbook-front/src/utils"
+	"net/http"
+)
 
 func AuthLoginController(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Tela de Login"))
+	util.ExecTemplate(w, "login.html", nil)
 }

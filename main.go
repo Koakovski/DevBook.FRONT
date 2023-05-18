@@ -2,11 +2,13 @@ package main
 
 import (
 	"devbook-front/src/app/router"
+	util "devbook-front/src/utils"
 	"log"
 	"net/http"
 )
 
 func main() {
+	util.LoadTemplates()
 	router := router.GenerateRouter()
 
 	stringApiPort := ":5000"
