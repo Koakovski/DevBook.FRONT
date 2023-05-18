@@ -14,7 +14,7 @@ type Route struct {
 }
 
 func ConfigureRoutes(router *mux.Router) *mux.Router {
-	routes := AuthRoutes
+	routes := append(AuthRoutes, UserRoutes...)
 
 	for _, route := range routes {
 		router.HandleFunc(route.Uri, route.Handler).Methods(route.Method)

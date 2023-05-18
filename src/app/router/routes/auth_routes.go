@@ -10,13 +10,13 @@ var AuthRoutes = []Route{
 	{
 		Uri:       "/",
 		Method:    http.MethodGet,
-		Handler:   controller.AuthLoginController,
+		Handler:   controller.AuthLoginPageController,
 		IsPrivate: false,
 	},
 	{
 		Uri:       "/login",
 		Method:    http.MethodGet,
-		Handler:   controller.AuthLoginController,
+		Handler:   controller.AuthLoginPageController,
 		IsPrivate: false,
 	},
 }
