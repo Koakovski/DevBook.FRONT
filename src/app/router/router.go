@@ -1,9 +1,11 @@
 package router
 
 import (
+	route "devbook-front/src/app/router/routes"
+
 	"github.com/gorilla/mux"
 )
 
 func GenerateRouter() *mux.Router {
-	return (mux.NewRouter())
+	return route.ConfigureRoutes(mux.NewRouter())
 }
