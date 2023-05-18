@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -20,5 +21,11 @@ func ApiUserCreateController(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(user)
+	response, err := http.Post("http://localhost:3000/user", "application/json", bytes.NewBuffer(user))
+	if err != nil {
+		log.Fatal(err)
+	}
+	response.Body.Close()
+
+	fmt.Println(response.Body)
 }
