@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/securecookie"
 )
 
+var CookieIdentifier = "AuthData"
 var s *securecookie.SecureCookie
 
 func ConfigureCookie() {
@@ -19,19 +20,32 @@ func SaveCookie(w http.ResponseWriter, Id, token string) error {
 		"token": token,
 	}
 
-	cookieIdentifier := "AuthData"
-
-	codedData, err := s.Encode(cookieIdentifier, data)
+	codedData, err := s.Encode(CookieIdentifier, data)
 	if err != nil {
 		return err
 	}
 
 	http.SetCookie(w, &http.Cookie{
-		Name:     cookieIdentifier,
+		Name:     CookieIdentifier,
 		Value:    codedData,
 		Path:     "/",
 		HttpOnly: true,
 	})
 
 	return nil
+}
+
+func ReadCookie(r *http.Request) (map[string]string, error) {
+	cookie, err := r.Cookie(CookieIdentifier)
+	if err != nil {
+		return nil, err
+	}
+
+	cookieValues := make(map[string]string)
+
+	if err := s.Decode(CookieIdentifier, cookie.Value, &cookieValues); err != nil {
+		return nil, err
+	}
+
+	return cookieValues, nil
 }

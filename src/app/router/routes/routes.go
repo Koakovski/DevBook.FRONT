@@ -1,6 +1,7 @@
 package route
 
 import (
+	middlware "devbook-front/src/app/middlwares"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -21,7 +22,11 @@ func ConfigureRoutes(router *mux.Router) *mux.Router {
 	routes = append(routes, HomeRoutes...)
 
 	for _, route := range routes {
-		router.HandleFunc(route.Uri, route.Handler).Methods(route.Method)
+		if route.IsPrivate {
+			router.HandleFunc(route.Uri, middlware.Authenticate(route.Handler)).Methods(route.Method)
+		} else {
+			router.HandleFunc(route.Uri, route.Handler).Methods(route.Method)
+		}
 	}
 
 	fileServer := http.FileServer(http.Dir("./assets/"))
