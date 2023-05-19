@@ -3,9 +3,8 @@ package controller
 import (
 	"bytes"
 	presenter "devbook-front/src/app/presenters"
+	model "devbook-front/src/domain/models"
 	"encoding/json"
-	"fmt"
-	"io"
 	"net/http"
 )
 
@@ -33,7 +32,11 @@ func ApiAuthLoginController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, _ := io.ReadAll(response.Body)
-	fmt.Println(response.StatusCode)
-	fmt.Println(token)
+	var authData model.AuthData
+	if err := json.NewDecoder(response.Body).Decode(&authData); err != nil {
+		presenter.ReponsePresenter(w, http.StatusUnprocessableEntity, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	presenter.ReponsePresenter(w, http.StatusOK, nil)
 }
