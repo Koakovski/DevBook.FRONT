@@ -5,19 +5,23 @@ function login(event) {
 
     const data = getFormFieldsValues();
 
-    console.log(data);
-
     $.ajax({
         url: "api/login",
         method: "POST",
         data,
     })
-        .done(function () {
-            window.location = "/home";
-        })
-        .fail(function () {
+        .done(successHandler)
+        .fail(function (jqXHR) {
+            if (jqXHR.status === 200) {
+                successHandler();
+                return;
+            }
             alert("Usuário ou senha inválidos!");
         });
+}
+
+function successHandler() {
+    window.location = "/home";
 }
 
 function getFormFieldsValues() {

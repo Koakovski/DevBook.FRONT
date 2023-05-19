@@ -3,6 +3,7 @@ package main
 import (
 	"devbook-front/src/app/router"
 	"devbook-front/src/infra/config"
+	cookie "devbook-front/src/infra/cookies"
 	util "devbook-front/src/utils"
 	"fmt"
 	"log"
@@ -11,6 +12,7 @@ import (
 
 func main() {
 	config.LoadConfig()
+	cookie.ConfigureCookie()
 
 	util.LoadTemplates()
 	router := router.GenerateRouter()
