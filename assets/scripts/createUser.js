@@ -15,17 +15,20 @@ function createUser(event) {
         method: "POST",
         data,
     })
-        .done(function (data) {
-            alert("SUCESSO");
-        })
+        .done(successHandler)
         .fail(function (jqXHR) {
             if (jqXHR.status === 201) {
-                alert("SUCESSO");
+                successHandler();
                 return;
             }
 
-            alert("FALHA");
+            alert("Falha ao cadastror o usuário!");
         });
+}
+
+function successHandler() {
+    alert("Usuário cadastrado com sucesso!");
+    window.location = "/login";
 }
 
 function getFormFieldsValues() {

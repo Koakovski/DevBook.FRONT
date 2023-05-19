@@ -4,16 +4,16 @@ import (
 	"bytes"
 	presenter "devbook-front/src/app/presenters"
 	"encoding/json"
+	"fmt"
+	"io"
 	"net/http"
 )
 
-func ApiUserCreateController(w http.ResponseWriter, r *http.Request) {
+func ApiAuthLoginController(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
-	userData, err := json.Marshal(map[string]string{
-		"name":     r.FormValue("name"),
+	loginData, err := json.Marshal(map[string]string{
 		"email":    r.FormValue("email"),
-		"nickName": r.FormValue("nickName"),
 		"password": r.FormValue("password"),
 	})
 	if err != nil {
@@ -21,7 +21,7 @@ func ApiUserCreateController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := http.Post("http://localhost:3000/user", "application/json", bytes.NewBuffer(userData))
+	response, err := http.Post("http://localhost:3000/login", "application/json", bytes.NewBuffer(loginData))
 	if err != nil {
 		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
 		return
@@ -33,5 +33,7 @@ func ApiUserCreateController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	presenter.ReponsePresenter(w, response.StatusCode, nil)
+	token, _ := io.ReadAll(response.Body)
+	fmt.Println(response.StatusCode)
+	fmt.Println(token)
 }

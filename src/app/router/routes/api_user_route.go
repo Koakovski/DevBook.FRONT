@@ -13,4 +13,11 @@ var ApiUserRoutes = []Route{
 		Handler:   controller.ApiUserCreateController,
 		IsPrivate: false,
 	},
+	// AUTH LOGIN
+	{
+		Uri:       "/api/login",
+		Method:    http.MethodPost,
+		Handler:   controller.ApiAuthLoginController,
+		IsPrivate: false,
+	},
 }
