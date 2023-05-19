@@ -1,11 +1,17 @@
 package presenter
 
-import "net/http"
+import (
+	"encoding/json"
+	"net/http"
+)
 
-func ErrorPresenter(w http.ResponseWriter, statusCode int, err error) {
-	ReponsePresenter(w, statusCode, struct {
-		Error string `json:"erro"`
-	}{
-		Error: err.Error(),
-	})
+type ApiError struct {
+	Error string `json:"error"`
+}
+
+func ErrorPresenter(w http.ResponseWriter, r *http.Response) {
+	var apiErr ApiError
+	json.NewDecoder(r.Body).Decode(&apiErr)
+
+	ReponsePresenter(w, r.StatusCode, apiErr)
 }

@@ -4,29 +4,35 @@ import (
 	"bytes"
 	presenter "devbook-front/src/app/presenters"
 	"encoding/json"
-	"fmt"
-	"log"
 	"net/http"
 )
 
 func ApiUserCreateController(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 
-	user, err := json.Marshal(map[string]string{
+	userData, err := json.Marshal(map[string]string{
 		"name":     r.FormValue("name"),
 		"email":    r.FormValue("email"),
-		"nickName": r.FormValue("nickname"),
+		"nickName": r.FormValue("nickName"),
 		"password": r.FormValue("password"),
 	})
+
 	if err != nil {
-		fmt.Println(err)
-		log.Fatal(err)
+		presenter.ReponsePresenter(w, http.StatusBadRequest, presenter.ApiError{Error: err.Error()})
+		return
 	}
 
-	response, err := http.Post("http://localhost:3000/user", "application/json", bytes.NewBuffer(user))
+	response, err := http.Post("http://localhost:3000/user", "application/json", bytes.NewBuffer(userData))
 	if err != nil {
-		log.Fatal(err)
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
 	}
 	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		presenter.ErrorPresenter(w, response)
+		return
+	}
+
 	presenter.ReponsePresenter(w, response.StatusCode, nil)
 }

@@ -16,20 +16,24 @@ function createUser(event) {
         data,
     })
         .done(function (data) {
-            alert(JSON.stringify(data));
-            alert("Usuário Cadastrado com sucesso!");
+            alert("SUCESSO");
         })
-        .fail(function (data) {
-            console.log(JSON.stringify(data));
+        .fail(function (jqXHR) {
+            if (jqXHR.status === 201) {
+                alert("SUCESSO");
+                return;
+            }
+
+            alert("FALHA");
         });
 }
 
 function getFormFieldsValues() {
     const name = $("#name").val();
     const email = $("#email").val();
-    const nickname = $("#nickName").val();
+    const nickName = $("#nickName").val();
     const password = $("#password").val();
     const confirmPassword = $("#confirmPassword").val();
 
-    return { name, email, nickname, password, confirmPassword };
+    return { name, email, nickName, password, confirmPassword };
 }
