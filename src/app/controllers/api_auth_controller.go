@@ -4,7 +4,9 @@ import (
 	"bytes"
 	presenter "devbook-front/src/app/presenters"
 	model "devbook-front/src/domain/models"
+	"devbook-front/src/infra/config"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -20,7 +22,8 @@ func ApiAuthLoginController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := http.Post("http://localhost:3000/login", "application/json", bytes.NewBuffer(loginData))
+	url := fmt.Sprintf("%s/login", config.ApiUrl)
+	response, err := http.Post(url, "application/json", bytes.NewBuffer(loginData))
 	if err != nil {
 		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
 		return

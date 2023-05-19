@@ -3,7 +3,9 @@ package controller
 import (
 	"bytes"
 	presenter "devbook-front/src/app/presenters"
+	"devbook-front/src/infra/config"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -21,7 +23,8 @@ func ApiUserCreateController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := http.Post("http://localhost:3000/user", "application/json", bytes.NewBuffer(userData))
+	url := fmt.Sprintf("%s/user", config.ApiUrl)
+	response, err := http.Post(url, "application/json", bytes.NewBuffer(userData))
 	if err != nil {
 		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
 		return
