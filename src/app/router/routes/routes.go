@@ -18,6 +18,7 @@ func ConfigureRoutes(router *mux.Router) *mux.Router {
 
 	routes = append(routes, UserRoutes...)
 	routes = append(routes, ApiUserRoutes...)
+	routes = append(routes, HomeRoutes...)
 
 	for _, route := range routes {
 		router.HandleFunc(route.Uri, route.Handler).Methods(route.Method)
