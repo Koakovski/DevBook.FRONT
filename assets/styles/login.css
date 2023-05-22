@@ -2,8 +2,8 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-};
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
 
 a {
     font-size: 16px;
@@ -58,7 +58,7 @@ input::placeholder {
     text-align: center;
     width: 100%;
     display: block;
-    padding-bottom: 30px;   
+    padding-bottom: 30px;
 }
 
 .devbook-form > div {
@@ -79,9 +79,9 @@ input::placeholder {
     height: 62px;
     background-color: #3b5998;
     outline: none;
-    border: none
+    border: none;
 }
 
-.btn-devbook:hover{
+.btn-devbook:hover {
     cursor: pointer;
 }
