@@ -1,7 +1,7 @@
 {{ define "publicationHeader" }}
 <h1 class="display-4">{{ .Title }}</h1>
 <p class="lead">{{ .Content }}</p>
-<a href="#">{{ .Author.NickName }} - {{ .CreatedAt }}</a>
+<a href="#">{{ .Author.NickName }} - {{ .CreatedAt.Format "02/01/2006" }}</a>
 <hr class="my-4" />
 {{ end }}
 
