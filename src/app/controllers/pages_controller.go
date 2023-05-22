@@ -4,11 +4,13 @@ import (
 	presenter "devbook-front/src/app/presenters"
 	model "devbook-front/src/domain/models"
 	"devbook-front/src/infra/config"
+	cookie "devbook-front/src/infra/cookies"
 	request "devbook-front/src/infra/requests"
 	util "devbook-front/src/utils"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 )
 
 func UserCreatePageController(w http.ResponseWriter, r *http.Request) {
@@ -40,9 +42,14 @@ func HomePageController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	cookie, _ := cookie.ReadCookie(r)
+	userId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
 	util.ExecTemplate(w, "home.html", struct {
 		Publications []model.Publication
+		UserId       uint64
 	}{
 		Publications: publications,
+		UserId:       userId,
 	})
 }

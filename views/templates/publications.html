@@ -1,0 +1,49 @@
+{{define "publicationHeader"}}
+<h1 class="display-4">{{ .Title }}</h1>
+<p class="lead">{{ .Content }}</p>
+<a href="#">{{ .Author.NickName }} - {{ .CreatedAt }}</a>
+<hr class="my-4" />
+{{end}}
+
+<!---->
+
+{{define "likes"}}
+<span>{{.Likes}} curtidas</span>
+{{end}}
+
+<!---->
+
+{{define "edit"}}
+<a href="/edit">Editar Publicação</a>
+{{end}}
+
+<!---->
+
+{{define "edit"}}
+<a href="/delete">Deletar Publicação</a>
+{{end}}
+
+<!---->
+
+{{ define "publication" }}
+<div class="jumbotron" publicationId="{{ .Id }}">
+    {{ template "publicationHeader" .}}
+    <!---->
+    <p>{{ template "likes" .}}</p>
+</div>
+{{ end }}
+
+<!---->
+
+{{ define "publicationWithPermission" }}
+<div class="jumbotron" publicationId="{{ .Id }}">
+    {{ template "publicationHeader" .}}
+    <p>
+        {{ template "likes" .}}
+        <!---->
+        {{ template "edit" .}}
+        <!---->
+        {{ template "delete" .}}
+    </p>
+</div>
+{{ end }}
