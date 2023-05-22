@@ -6,6 +6,19 @@ import (
 )
 
 var PagesRoutes = []Route{
+	// LOAD LOGIN PAGE
+	{
+		Uri:       "/",
+		Method:    http.MethodGet,
+		Handler:   controller.AuthLoginPageController,
+		IsPrivate: false,
+	},
+	{
+		Uri:       "/login",
+		Method:    http.MethodGet,
+		Handler:   controller.AuthLoginPageController,
+		IsPrivate: false,
+	},
 	// LOAD HOME PAGE
 	{
 		Uri:       "/home",
@@ -20,17 +33,11 @@ var PagesRoutes = []Route{
 		Handler:   controller.UserCreatePageController,
 		IsPrivate: false,
 	},
-	// LOAD LOGIN PAGE
+	// LOAD EDIT PUBLICATION PAGE
 	{
-		Uri:       "/",
+		Uri:       "/publication/{id}/edit",
 		Method:    http.MethodGet,
-		Handler:   controller.AuthLoginPageController,
-		IsPrivate: false,
-	},
-	{
-		Uri:       "/login",
-		Method:    http.MethodGet,
-		Handler:   controller.AuthLoginPageController,
+		Handler:   controller.PublicationEditPageController,
 		IsPrivate: false,
 	},
 }

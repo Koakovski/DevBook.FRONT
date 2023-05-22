@@ -11,6 +11,8 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 func UserCreatePageController(w http.ResponseWriter, r *http.Request) {
@@ -52,4 +54,36 @@ func HomePageController(w http.ResponseWriter, r *http.Request) {
 		Publications: publications,
 		UserId:       userId,
 	})
+}
+
+func PublicationEditPageController(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+
+	publicationId, err := strconv.ParseUint(params["id"], 10, 64)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusBadRequest, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	url := fmt.Sprintf("%s/publication/%d", config.ApiUrl, publicationId)
+	response, err := request.RequestWithAuth(r, http.MethodGet, url, nil)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		presenter.ErrorPresenter(w, response)
+		return
+	}
+
+	var publication model.Publication
+
+	if err := json.NewDecoder(response.Body).Decode(&publication); err != nil {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	util.ExecTemplate(w, "editPublication.html", publication)
 }
