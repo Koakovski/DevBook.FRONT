@@ -20,4 +20,11 @@ var ApiPublicationRoutes = []Route{
 		Handler:   controller.ApiPublicationLikeController,
 		IsPrivate: true,
 	},
+	// UNLIKE PUBLICATION
+	{
+		Uri:       "/api/publication/{id}/unlike",
+		Method:    http.MethodPost,
+		Handler:   controller.ApiPublicationUnlikeController,
+		IsPrivate: true,
+	},
 }
