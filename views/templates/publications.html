@@ -8,19 +8,24 @@
 <!---->
 
 {{define "likes"}}
-<span>{{.Likes}} curtidas</span>
+<i class="fa-solid fa-heart"></i>
+<span>{{.Likes}}</span>
 {{ end }}
 
 <!---->
 
 {{ define "edit" }}
-<a href="/edit">Editar Publicação</a>
+<a href="/edit" style="text-decoration: none">
+    <i class="fa-solid fa-pen-to-square"></i>
+</a>
 {{ end }}
 
 <!---->
 
 {{ define "delete" }}
-<a href="/delete">Deletar Publicação</a>
+<a href="/delete" style="text-decoration: none">
+    <i class="fa-solid fa-trash text-danger"></i>
+</a>
 {{ end }}
 
 <!---->
