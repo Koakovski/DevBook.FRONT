@@ -13,4 +13,11 @@ var ApiPublicationRoutes = []Route{
 		Handler:   controller.ApiPublicationCreateController,
 		IsPrivate: true,
 	},
+	// LIKE PUBLICATION
+	{
+		Uri:       "/api/publication/{id}/like",
+		Method:    http.MethodPost,
+		Handler:   controller.ApiPublicationLikeController,
+		IsPrivate: true,
+	},
 }
