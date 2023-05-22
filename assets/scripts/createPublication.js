@@ -10,10 +10,13 @@ function CreatePublication(event) {
         method: "POST",
         data,
     })
-        .done(function () {
-            alert("Publicação criada com sucesso!");
-        })
-        .fail(function () {
+        .done(successHandler)
+        .fail(function (jqXHR) {
+            if (jqXHR.status === 201) {
+                successHandler();
+                return;
+            }
+
             alert("Falha ao criar publicação!");
         });
 }
@@ -23,4 +26,8 @@ function getFormFieldsValues() {
     const content = $("#content").val();
 
     return { title, content };
+}
+
+function successHandler() {
+    window.location = "/home";
 }
