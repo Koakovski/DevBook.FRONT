@@ -1,0 +1,45 @@
+{{ define "main-header" }}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/home">DevBook</a>
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#main-navbar"
+        aria-controls="main-navbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">Meu Perfil</a>
+            </li>
+
+            <li class="nav-item">
+                <form class="form-inline my-2 my-lg-0" action="/search-user" method="GET">
+                    <input
+                        type="search"
+                        class="form-control mr-sm-2"
+                        id="search-user"
+                        name="search-user"
+                        placeholder="Buscar usuários"
+                        required
+                    />
+                </form>
+            </li>
+
+            <span class="navbar-text p-0"><a href="/logout">Sair</a></span>
+        </ul>
+    </div>
+</nav>
+
+{{ end }}
