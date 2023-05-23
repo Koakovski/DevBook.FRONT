@@ -27,11 +27,11 @@ var ApiPublicationRoutes = []Route{
 		Handler:   controller.ApiPublicationUnlikeController,
 		IsPrivate: true,
 	},
-	// EDIT PUBLICATION
+	// UPDATE PUBLICATION
 	{
 		Uri:       "/api/publication/{id}",
 		Method:    http.MethodPut,
-		Handler:   controller.ApiPublicationEditController,
+		Handler:   controller.ApiPublicationUpdateController,
 		IsPrivate: true,
 	},
 }

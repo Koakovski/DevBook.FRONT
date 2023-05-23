@@ -56,7 +56,7 @@ func HomePageController(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func PublicationEditPageController(w http.ResponseWriter, r *http.Request) {
+func PublicationUpdatePageController(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
 	publicationId, err := strconv.ParseUint(params["id"], 10, 64)
@@ -85,5 +85,5 @@ func PublicationEditPageController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	util.ExecTemplate(w, "editPublication.html", publication)
+	util.ExecTemplate(w, "updatePublication.html", publication)
 }

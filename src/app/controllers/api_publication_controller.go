@@ -91,7 +91,7 @@ func ApiPublicationUnlikeController(w http.ResponseWriter, r *http.Request) {
 	presenter.ReponsePresenter(w, response.StatusCode, nil)
 }
 
-func ApiPublicationEditController(w http.ResponseWriter, r *http.Request) {
+func ApiPublicationUpdateController(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
 	publicationId, err := strconv.ParseUint(params["id"], 10, 64)

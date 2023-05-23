@@ -33,11 +33,11 @@ var PagesRoutes = []Route{
 		Handler:   controller.UserCreatePageController,
 		IsPrivate: false,
 	},
-	// LOAD EDIT PUBLICATION PAGE
+	// LOAD UPDATE PUBLICATION PAGE
 	{
-		Uri:       "/publication/{id}/edit",
+		Uri:       "/publication/{id}/update",
 		Method:    http.MethodGet,
-		Handler:   controller.PublicationEditPageController,
+		Handler:   controller.PublicationUpdatePageController,
 		IsPrivate: false,
 	},
 }
