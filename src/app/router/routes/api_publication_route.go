@@ -34,4 +34,11 @@ var ApiPublicationRoutes = []Route{
 		Handler:   controller.ApiPublicationUpdateController,
 		IsPrivate: true,
 	},
+	// DELETE PUBLICATION
+	{
+		Uri:       "/api/publication/{id}",
+		Method:    http.MethodDelete,
+		Handler:   controller.ApiPublicationDeleteController,
+		IsPrivate: true,
+	},
 }

@@ -126,3 +126,33 @@ func ApiPublicationUpdateController(w http.ResponseWriter, r *http.Request) {
 
 	presenter.ReponsePresenter(w, response.StatusCode, nil)
 }
+
+func ApiPublicationDeleteController(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+
+	publicationId, err := strconv.ParseUint(params["id"], 10, 64)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusBadRequest, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusBadRequest, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	url := fmt.Sprintf("%s/publication/%d", config.ApiUrl, publicationId)
+	response, err := request.RequestWithAuth(r, http.MethodDelete, url, nil)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		presenter.ErrorPresenter(w, response)
+		return
+	}
+
+	presenter.ReponsePresenter(w, response.StatusCode, nil)
+}
