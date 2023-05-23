@@ -15,10 +15,12 @@ function createUser(event) {
         method: "POST",
         data,
     })
-        .done(successHandler)
+        .done(function () {
+            successHandler(data);
+        })
         .fail(function (jqXHR) {
             if (jqXHR.status === 201) {
-                successHandler();
+                successHandler(data);
                 return;
             }
 
@@ -26,9 +28,21 @@ function createUser(event) {
         });
 }
 
-function successHandler() {
+function successHandler(data) {
     Swal.fire("Sucesso!", "Usuário cadastrado com sucesso!", "success").then(function () {
-        window.location = "/login";
+        $.ajax({
+            url: "/api/login",
+            method: "POST",
+            data,
+        })
+            .done(function () {
+                window.location = "/home";
+            })
+            .fail(function (jqXHR) {
+                if (jqXHR.status === 200) {
+                    window.location = "/home";
+                }
+            });
     });
 }
 
