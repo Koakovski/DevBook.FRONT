@@ -15,7 +15,7 @@
 <!---->
 
 {{ define "edit" }}
-<a href="/publications/{{ .Id }}/edit" style="text-decoration: none">
+<a href="/publication/{{ .Id }}/edit" style="text-decoration: none">
     <i class="fa-solid fa-pen-to-square"></i>
 </a>
 {{ end }}
@@ -23,7 +23,7 @@
 <!---->
 
 {{ define "delete" }}
-<a href="/delete" style="text-decoration: none">
+<a href="/publication/{{ .Id }}/delete" style="text-decoration: none">
     <i class="fa-solid fa-trash text-danger"></i>
 </a>
 {{ end }}
