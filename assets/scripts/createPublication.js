@@ -17,7 +17,7 @@ function CreatePublication(event) {
                 return;
             }
 
-            Swal.fire("Ops..", "Falha ao criar publicação!", "error");
+            Swal.fire("Ops...", "Falha ao criar publicação!", "error");
         });
 }
 

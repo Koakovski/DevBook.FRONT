@@ -41,4 +41,11 @@ var ApiUserRoutes = []Route{
 		Handler:   controller.ApiUserUpdateController,
 		IsPrivate: true,
 	},
+	// UPDATE USER PASSWORD
+	{
+		Uri:       "/api/updatePassword",
+		Method:    http.MethodPost,
+		Handler:   controller.ApiPasswordUpdateController,
+		IsPrivate: true,
+	},
 }

@@ -6,7 +6,7 @@ function createUser(event) {
     const data = getFormFieldsValues();
 
     if (data.password != data.confirmPassword) {
-        Swal.fire("Ops..", "As senha não coincidem!", "error");
+        Swal.fire("Ops...", "As senha não coincidem!", "error");
         return;
     }
 
@@ -24,7 +24,7 @@ function createUser(event) {
                 return;
             }
 
-            Swal.fire("Ops..", "Falha ao cadastror o usuário!", "error");
+            Swal.fire("Ops...", "Falha ao cadastror o usuário!", "error");
         });
 }
 

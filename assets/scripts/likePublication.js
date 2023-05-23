@@ -27,7 +27,7 @@ function likePublication(event) {
             element.removeClass(likePublicationClass);
         })
         .fail(function (data) {
-            Swal.fire("Ops..", "Falha ao curtir publicação!", "error");
+            Swal.fire("Ops...", "Falha ao curtir publicação!", "error");
         })
         .always(function () {
             element.prop("disabled", false);
@@ -57,7 +57,7 @@ function unlikePublication(event) {
             element.addClass(likePublicationClass);
         })
         .fail(function () {
-            Swal.fire("Ops..", "Falha ao descurtir publicação!", "error");
+            Swal.fire("Ops...", "Falha ao descurtir publicação!", "error");
         })
         .always(function () {
             element.prop("disabled", false);

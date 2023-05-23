@@ -68,4 +68,11 @@ var PagesRoutes = []Route{
 		Handler:   controller.UserUpdatePageController,
 		IsPrivate: true,
 	},
+	// LOAD UPDATE USER PASSWORD PAGE
+	{
+		Uri:       "/updatePassword",
+		Method:    http.MethodGet,
+		Handler:   controller.UserUpdatePasswordController,
+		IsPrivate: true,
+	},
 }

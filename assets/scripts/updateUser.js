@@ -18,7 +18,7 @@ function updateUser(event) {
             );
         })
         .fail(function () {
-            Swal.fire("Ops..", "Falha ao atualizar a usuário!", "error");
+            Swal.fire("Ops...", "Falha ao atualizar a usuário!", "error");
         });
 }
 

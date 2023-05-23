@@ -16,7 +16,7 @@ function login(event) {
                 successHandler();
                 return;
             }
-            Swal.fire("Ops..", "Usuário ou senha inválidos!", "error");
+            Swal.fire("Ops...", "Usuário ou senha inválidos!", "error");
         });
 }
 

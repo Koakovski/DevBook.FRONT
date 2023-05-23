@@ -14,7 +14,7 @@ function followUser() {
             window.location = `/user/${userId}`;
         })
         .fail(function () {
-            Swal.fire("Ops..", "Falha ao seguir usuário a publicação!", "error");
+            Swal.fire("Ops...", "Falha ao seguir usuário a publicação!", "error");
         })
         .always(() => {
             $("#follow").prop("disabled", false);
@@ -34,7 +34,11 @@ function unfollowUser() {
             window.location = `/user/${userId}`;
         })
         .fail(function () {
-            Swal.fire("Ops..", "Falha ao parar de seguir usuário a publicação!", "error");
+            Swal.fire(
+                "Ops...",
+                "Falha ao parar de seguir usuário a publicação!",
+                "error"
+            );
         })
         .always(() => {
             $("#unfollow").prop("disabled", false);

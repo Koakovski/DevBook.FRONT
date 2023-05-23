@@ -33,7 +33,7 @@ function handleDelete(event) {
                 handleDeleteSucess(publication);
                 return;
             }
-            Swal.fire("Ops..", "Falha ao excluir a publicação!", "error");
+            Swal.fire("Ops...", "Falha ao excluir a publicação!", "error");
         })
         .always(() => {
             $(".delete-publication").prop("disabled", false);

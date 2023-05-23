@@ -181,3 +181,7 @@ func UserUpdatePageController(w http.ResponseWriter, r *http.Request) {
 
 	util.ExecTemplate(w, "userUpdate.html", user)
 }
+
+func UserUpdatePasswordController(w http.ResponseWriter, r *http.Request) {
+	util.ExecTemplate(w, "passwordUpdate.html", nil)
+}

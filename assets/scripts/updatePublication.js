@@ -20,7 +20,7 @@ function updatePublication() {
             );
         })
         .fail(function () {
-            Swal.fire("Ops..", "Falha ao atualizar a publicação!", "error");
+            Swal.fire("Ops...", "Falha ao atualizar a publicação!", "error");
         })
         .always(() => {
             $("#update-publication").prop("disabled", false);
