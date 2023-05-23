@@ -48,4 +48,11 @@ var ApiUserRoutes = []Route{
 		Handler:   controller.ApiPasswordUpdateController,
 		IsPrivate: true,
 	},
+	// DELETE USER
+	{
+		Uri:       "/api/userDelete",
+		Method:    http.MethodDelete,
+		Handler:   controller.ApiUserDeleteController,
+		IsPrivate: true,
+	},
 }

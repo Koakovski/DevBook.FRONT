@@ -5,18 +5,18 @@ function deletePublication(event) {
 
     Swal.fire({
         title: "Atenção!",
-        text: "Tem certeza que deseja excluir essa publicação, essa ação é irreversível!",
+        text: "Tem certeza que deseja excluir essa publicação? Essa ação é irreversível!",
         showCancelButton: true,
         cancelButtonText: "Cancelar",
         icon: "warning",
     }).then(function (confirmation) {
         if (!confirmation.isConfirmed) return;
 
-        handleDelete(event);
+        handlePublicationDelete(event);
     });
 }
 
-function handleDelete(event) {
+function handlePublicationDelete(event) {
     const element = $(event.target);
     const publication = element.closest("div");
     const publicationId = publication.data("publication-id");

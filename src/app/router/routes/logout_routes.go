@@ -11,6 +11,6 @@ var LogoutRoutes = []Route{
 		Uri:       "/logout",
 		Method:    http.MethodGet,
 		Handler:   controller.LogoutController,
-		IsPrivate: true,
+		IsPrivate: false,
 	},
 }
