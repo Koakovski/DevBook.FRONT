@@ -34,4 +34,11 @@ var ApiUserRoutes = []Route{
 		Handler:   controller.ApiUserUnfollowController,
 		IsPrivate: true,
 	},
+	// UPDATE USER
+	{
+		Uri:       "/api/updateUser",
+		Method:    http.MethodPut,
+		Handler:   controller.ApiUserUpdateController,
+		IsPrivate: true,
+	},
 }

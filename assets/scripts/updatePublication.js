@@ -13,9 +13,11 @@ function updatePublication() {
         data,
     })
         .done(function () {
-            Swal.fire("Sucesso!", "Publição editada com sucesso!", "success").then(() => {
-                window.location = "/home";
-            });
+            Swal.fire("Sucesso!", "Publição atualizada com sucesso!", "success").then(
+                () => {
+                    window.location = "/profile";
+                }
+            );
         })
         .fail(function () {
             Swal.fire("Ops..", "Falha ao atualizar a publicação!", "error");

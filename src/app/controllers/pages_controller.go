@@ -165,5 +165,19 @@ func UserAuthenticatedProfilePageController(w http.ResponseWriter, r *http.Reque
 	}
 
 	util.ExecTemplate(w, "userAuthenticatedProfile.html", user)
+}
 
+func UserUpdatePageController(w http.ResponseWriter, r *http.Request) {
+	cookie, _ := cookie.ReadCookie(r)
+	authenticatedUserId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	channel := make(chan model.User)
+	go model.GetUserData(channel, authenticatedUserId, r)
+
+	user := <-channel
+	if user.Id == 0 {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: "erro ao buscar usuário"})
+	}
+
+	util.ExecTemplate(w, "userUpdate.html", user)
 }

@@ -28,7 +28,7 @@ func GetCompleteUser(userId uint64, r *http.Request) (User, error) {
 	userFollowingChannel := make(chan []User)
 	userPublicationsChannel := make(chan []Publication)
 
-	go getUserData(userDataChannel, userId, r)
+	go GetUserData(userDataChannel, userId, r)
 	go getUserFollowersData(userFollowersChannel, userId, r)
 	go getUserFollowingData(userFollowingChannel, userId, r)
 	go getUserPublicationsData(userPublicationsChannel, userId, r)
@@ -76,7 +76,7 @@ func GetCompleteUser(userId uint64, r *http.Request) (User, error) {
 	return user, nil
 }
 
-func getUserData(channel chan<- User, userId uint64, r *http.Request) {
+func GetUserData(channel chan<- User, userId uint64, r *http.Request) {
 	var user User
 
 	url := fmt.Sprintf("%s/user/%d", config.ApiUrl, userId)

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	presenter "devbook-front/src/app/presenters"
 	"devbook-front/src/infra/config"
+	cookie "devbook-front/src/infra/cookies"
 	request "devbook-front/src/infra/requests"
 	"encoding/json"
 	"fmt"
@@ -79,6 +80,39 @@ func ApiUserUnfollowController(w http.ResponseWriter, r *http.Request) {
 
 	url := fmt.Sprintf("%s/user/%d/unfollow", config.ApiUrl, userId)
 	response, err := request.RequestWithAuth(r, http.MethodPost, url, nil)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		presenter.ErrorPresenter(w, response)
+		return
+	}
+
+	presenter.ReponsePresenter(w, response.StatusCode, nil)
+}
+
+func ApiUserUpdateController(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+
+	userData, err := json.Marshal(map[string]string{
+		"name":     r.FormValue("name"),
+		"email":    r.FormValue("email"),
+		"nickName": r.FormValue("nickName"),
+		"password": r.FormValue("password"),
+	})
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusBadRequest, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	cookie, _ := cookie.ReadCookie(r)
+	authenticatedUserId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	url := fmt.Sprintf("%s/user/%d", config.ApiUrl, authenticatedUserId)
+	response, err := request.RequestWithAuth(r, http.MethodPut, url, bytes.NewBuffer(userData))
 	if err != nil {
 		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
 		return
