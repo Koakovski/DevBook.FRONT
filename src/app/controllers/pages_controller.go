@@ -131,14 +131,19 @@ func UserProfilePageController(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	cookie, _ := cookie.ReadCookie(r)
+	authenticatedUserId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	if userId == authenticatedUserId {
+		http.Redirect(w, r, "/profile", http.StatusPermanentRedirect)
+		return
+	}
+
 	user, err := model.GetCompleteUser(userId, r)
 	if err != nil {
 		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
 		return
 	}
-
-	cookie, _ := cookie.ReadCookie(r)
-	authenticatedUserId, _ := strconv.ParseUint(cookie["id"], 10, 64)
 
 	util.ExecTemplate(w, "userVisitedProfile.html", struct {
 		User                model.User
@@ -147,4 +152,18 @@ func UserProfilePageController(w http.ResponseWriter, r *http.Request) {
 		User:                user,
 		AuthenticatedUserId: authenticatedUserId,
 	})
+}
+
+func UserAuthenticatedProfilePageController(w http.ResponseWriter, r *http.Request) {
+	cookie, _ := cookie.ReadCookie(r)
+	authenticatedUserId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	user, err := model.GetCompleteUser(authenticatedUserId, r)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	util.ExecTemplate(w, "userAuthenticatedProfile.html", user)
+
 }

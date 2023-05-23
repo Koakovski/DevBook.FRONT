@@ -54,4 +54,11 @@ var PagesRoutes = []Route{
 		Handler:   controller.UserProfilePageController,
 		IsPrivate: true,
 	},
+	// LOAD USER PROFILE PAGE
+	{
+		Uri:       "/profile",
+		Method:    http.MethodGet,
+		Handler:   controller.UserAuthenticatedProfilePageController,
+		IsPrivate: true,
+	},
 }
