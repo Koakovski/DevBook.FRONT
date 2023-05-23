@@ -20,4 +20,18 @@ var ApiUserRoutes = []Route{
 		Handler:   controller.ApiAuthLoginController,
 		IsPrivate: false,
 	},
+	// FOLLOW USER
+	{
+		Uri:       "/api/user/{id}/follow",
+		Method:    http.MethodPost,
+		Handler:   controller.ApiUserFollowController,
+		IsPrivate: true,
+	},
+	// UNFOLLOW USER
+	{
+		Uri:       "/api/user/{id}/unfollow",
+		Method:    http.MethodPost,
+		Handler:   controller.ApiUserUnfollowController,
+		IsPrivate: true,
+	},
 }

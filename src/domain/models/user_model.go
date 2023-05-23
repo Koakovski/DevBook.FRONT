@@ -105,6 +105,11 @@ func getUserFollowersData(channel chan<- []User, userId uint64, r *http.Request)
 
 	_ = json.NewDecoder(response.Body).Decode(&users)
 
+	if users == nil {
+		channel <- make([]User, 0)
+		return
+	}
+
 	channel <- users
 }
 
@@ -121,6 +126,11 @@ func getUserFollowingData(channel chan<- []User, userId uint64, r *http.Request)
 
 	_ = json.NewDecoder(response.Body).Decode(&users)
 
+	if users == nil {
+		channel <- make([]User, 0)
+		return
+	}
+
 	channel <- users
 }
 
@@ -136,6 +146,11 @@ func getUserPublicationsData(channel chan<- []Publication, userId uint64, r *htt
 	defer response.Body.Close()
 
 	_ = json.NewDecoder(response.Body).Decode(&publications)
+
+	if publications == nil {
+		channel <- make([]Publication, 0)
+		return
+	}
 
 	channel <- publications
 }
