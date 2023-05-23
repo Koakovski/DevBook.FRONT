@@ -13,7 +13,7 @@ function likePublication(event) {
     element.prop("disabled", true);
 
     $.ajax({
-        url: `api/publication/${publicationId}/like`,
+        url: `/api/publication/${publicationId}/like`,
         method: "POST",
     })
         .done(function () {
@@ -26,7 +26,7 @@ function likePublication(event) {
             element.addClass("text-danger");
             element.removeClass(likePublicationClass);
         })
-        .fail(function () {
+        .fail(function (data) {
             Swal.fire("Ops..", "Falha ao curtir publicação!", "error");
         })
         .always(function () {

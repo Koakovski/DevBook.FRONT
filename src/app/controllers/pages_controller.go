@@ -121,3 +121,30 @@ func SearchUsersPageController(w http.ResponseWriter, r *http.Request) {
 
 	util.ExecTemplate(w, "searchUsers.html", users)
 }
+
+func UserProfilePageController(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+
+	userId, err := strconv.ParseUint(params["id"], 10, 64)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusBadRequest, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	user, err := model.GetCompleteUser(userId, r)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	cookie, _ := cookie.ReadCookie(r)
+	authenticatedUserId, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	util.ExecTemplate(w, "userVisitedProfile.html", struct {
+		User                model.User
+		AuthenticatedUserId uint64
+	}{
+		User:                user,
+		AuthenticatedUserId: authenticatedUserId,
+	})
+}
