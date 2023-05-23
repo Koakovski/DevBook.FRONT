@@ -43,7 +43,7 @@ function unlikePublication(event) {
     element.prop("disabled", true);
 
     $.ajax({
-        url: `api/publication/${publicationId}/unlike`,
+        url: `/api/publication/${publicationId}/unlike`,
         method: "POST",
     })
         .done(function () {

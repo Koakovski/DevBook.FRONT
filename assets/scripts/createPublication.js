@@ -6,7 +6,7 @@ function CreatePublication(event) {
     const data = getFormFieldsValues();
 
     $.ajax({
-        url: "api/publication",
+        url: "/api/publication",
         method: "POST",
         data,
     })

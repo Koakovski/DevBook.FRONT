@@ -11,7 +11,7 @@ function createUser(event) {
     }
 
     $.ajax({
-        url: "api/user",
+        url: "/api/user",
         method: "POST",
         data,
     })

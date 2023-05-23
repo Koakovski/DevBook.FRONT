@@ -6,7 +6,7 @@ function login(event) {
     const data = getFormFieldsValues();
 
     $.ajax({
-        url: "api/login",
+        url: "/api/login",
         method: "POST",
         data,
     })
