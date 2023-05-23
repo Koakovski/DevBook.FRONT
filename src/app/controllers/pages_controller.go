@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -93,4 +94,30 @@ func PublicationUpdatePageController(w http.ResponseWriter, r *http.Request) {
 	}
 
 	util.ExecTemplate(w, "updatePublication.html", publication)
+}
+
+func SearchUsersPageController(w http.ResponseWriter, r *http.Request) {
+	nameOrnick := strings.ToLower(r.URL.Query().Get("user"))
+
+	url := fmt.Sprintf("%s/user?user=%s", config.ApiUrl, nameOrnick)
+	response, err := request.RequestWithAuth(r, http.MethodGet, url, nil)
+	if err != nil {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		presenter.ErrorPresenter(w, response)
+		return
+	}
+
+	var users []model.User
+
+	if err := json.NewDecoder(response.Body).Decode(&users); err != nil {
+		presenter.ReponsePresenter(w, http.StatusInternalServerError, presenter.ApiError{Error: err.Error()})
+		return
+	}
+
+	util.ExecTemplate(w, "searchUsers.html", users)
 }

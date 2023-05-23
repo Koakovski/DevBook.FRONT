@@ -19,13 +19,6 @@ var PagesRoutes = []Route{
 		Handler:   controller.AuthLoginPageController,
 		IsPrivate: false,
 	},
-	// LOAD HOME PAGE
-	{
-		Uri:       "/home",
-		Method:    http.MethodGet,
-		Handler:   controller.HomePageController,
-		IsPrivate: true,
-	},
 	// LOAD CREATE USER PAGE
 	{
 		Uri:       "/createUser",
@@ -33,11 +26,25 @@ var PagesRoutes = []Route{
 		Handler:   controller.UserCreatePageController,
 		IsPrivate: false,
 	},
+	// LOAD HOME PAGE
+	{
+		Uri:       "/home",
+		Method:    http.MethodGet,
+		Handler:   controller.HomePageController,
+		IsPrivate: true,
+	},
 	// LOAD UPDATE PUBLICATION PAGE
 	{
 		Uri:       "/publication/{id}/update",
 		Method:    http.MethodGet,
 		Handler:   controller.PublicationUpdatePageController,
-		IsPrivate: false,
+		IsPrivate: true,
+	},
+	// LOAD SEARCH USERS PAGE
+	{
+		Uri:       "/searchUsers",
+		Method:    http.MethodGet,
+		Handler:   controller.SearchUsersPageController,
+		IsPrivate: true,
 	},
 }
