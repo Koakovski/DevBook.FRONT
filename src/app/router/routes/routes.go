@@ -19,6 +19,7 @@ func ConfigureRoutes(router *mux.Router) *mux.Router {
 
 	routes = append(routes, ApiUserRoutes...)
 	routes = append(routes, ApiPublicationRoutes...)
+	routes = append(routes, LogoutRoutes...)
 
 	for _, route := range routes {
 		if route.IsPrivate {

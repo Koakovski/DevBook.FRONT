@@ -3,6 +3,7 @@ package cookie
 import (
 	"devbook-front/src/infra/config"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/securecookie"
 )
@@ -48,4 +49,14 @@ func ReadCookie(r *http.Request) (map[string]string, error) {
 	}
 
 	return cookieValues, nil
+}
+
+func DeleteCookie(w http.ResponseWriter) {
+	http.SetCookie(w, &http.Cookie{
+		Name:     CookieIdentifier,
+		Value:    "",
+		Path:     "/",
+		HttpOnly: true,
+		Expires:  time.Unix(0, 0),
+	})
 }
