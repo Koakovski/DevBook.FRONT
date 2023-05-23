@@ -20,6 +20,13 @@ func UserCreatePageController(w http.ResponseWriter, r *http.Request) {
 }
 
 func AuthLoginPageController(w http.ResponseWriter, r *http.Request) {
+	cookieData, _ := cookie.ReadCookie(r)
+
+	if cookieData["token"] != "" {
+		http.Redirect(w, r, "/home", http.StatusMovedPermanently)
+		return
+	}
+
 	util.ExecTemplate(w, "login.html", nil)
 }
 
