@@ -13,10 +13,12 @@ function updatePublication() {
         data,
     })
         .done(function () {
-            window.location = "/home";
+            Swal.fire("Sucesso!", "Publição editada com sucesso!", "success").then(() => {
+                window.location = "/home";
+            });
         })
         .fail(function () {
-            alert("Falha!");
+            Swal.fire("Ops..", "Falha ao atualizar a publicação!", "error");
         })
         .always(() => {
             $("#update-publication").prop("disabled", false);

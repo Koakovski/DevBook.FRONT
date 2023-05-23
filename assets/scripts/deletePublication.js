@@ -1,11 +1,23 @@
 $(".delete-publication").on("click", deletePublication);
 
 function deletePublication(event) {
-    console.log(event);
     event.preventDefault();
 
+    Swal.fire({
+        title: "Atenção!",
+        text: "Tem certeza que deseja excluir essa publicação, essa ação é irreversível!",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        icon: "warning",
+    }).then(function (confirmation) {
+        if (!confirmation.isConfirmed) return;
+
+        handleDelete(event);
+    });
+}
+
+function handleDelete(event) {
     const element = $(event.target);
-    console.log(element);
     const publication = element.closest("div");
     const publicationId = publication.data("publication-id");
 
@@ -14,20 +26,24 @@ function deletePublication(event) {
         method: "DELETE",
     })
         .done(function () {
-            publication.fadeOut("slow", function () {
-                $(this).remove();
-            });
+            handleDeleteSucess(publication);
         })
         .fail(function (jqXHR) {
             if (jqXHR.status === 200) {
-                publication.fadeOut("slow", function () {
-                    $(this).remove();
-                });
+                handleDeleteSucess(publication);
                 return;
             }
-            alert("Falha!");
+            Swal.fire("Ops..", "Falha ao excluir a publicação!", "error");
         })
         .always(() => {
             $(".delete-publication").prop("disabled", false);
         });
+}
+
+function handleDeleteSucess(publication) {
+    Swal.fire("Sucesso!", "Publição excluida com sucesso!", "success").then(() => {
+        publication.fadeOut("slow", function () {
+            $(this).remove();
+        });
+    });
 }

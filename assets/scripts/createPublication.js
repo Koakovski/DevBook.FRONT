@@ -17,7 +17,7 @@ function CreatePublication(event) {
                 return;
             }
 
-            alert("Falha ao criar publicação!");
+            Swal.fire("Ops..", "Falha ao criar publicação!", "error");
         });
 }
 
@@ -29,5 +29,7 @@ function getFormFieldsValues() {
 }
 
 function successHandler() {
-    window.location = "/home";
+    Swal.fire("Sucesso!", "Publição criada com sucesso!", "success").then(() => {
+        window.location = "/home";
+    });
 }

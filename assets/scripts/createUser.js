@@ -6,7 +6,7 @@ function createUser(event) {
     const data = getFormFieldsValues();
 
     if (data.password != data.confirmPassword) {
-        alert("Senhas não coincidem!");
+        Swal.fire("Ops..", "As senha não coincidem!", "error");
         return;
     }
 
@@ -22,13 +22,14 @@ function createUser(event) {
                 return;
             }
 
-            alert("Falha ao cadastror o usuário!");
+            Swal.fire("Ops..", "Falha ao cadastror o usuário!", "error");
         });
 }
 
 function successHandler() {
-    alert("Usuário cadastrado com sucesso!");
-    window.location = "/login";
+    Swal.fire("Sucesso!", "Usuário cadastrado com sucesso!", "success").then(function () {
+        window.location = "/login";
+    });
 }
 
 function getFormFieldsValues() {
